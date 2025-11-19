@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillTrack Academy</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h2 {
+      text-align: center;
+      color: #34495e;
+      margin-bottom: 20px;
+    }
+    form {
+      margin: 30px 0;
+      text-align: center;
+    }
+    input {
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 16px;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 12px 30px;
+      font-size: 16px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    hr {
+      border: 1px solid #eee;
+      margin: 30px 0;
+    }
+    h3 {
+      color: #2c3e50;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #f8f9fa;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border-left: 5px solid #3498db;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .no-data {
+      color: #7f8c8d;
+      font-style: italic;
+      text-align: center;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SkillTrack Academy</h1>
+    <h2>Student Progress Dashboard</h2>
+    <hr>
+
+    <!-- Add Student Form -->
+    <form action="/students" method="POST">
+      <input 
+        type="text" 
+        name="name" 
+        placeholder="Enter Student Name" 
+        required 
+      />
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Enter Student Email" 
+        required 
+      />
+      <button type="submit">Add Student</button>
+    </form>
+
+    <hr>
+
+    <!-- Student List -->
+    <h3>Registered Students (<%= students.length %>)</h3>
+
+    <% if (students.length === 0) { %>
+      <p class="no-data">No students added yet. Be the first!</p>
+    <% } else { %>
+      <ul>
+        <% students.forEach(student => { %>
+          <li>
+            <strong><%= student.name %></strong><br>
+            <small><%= student.email %> (ID: <%= student.id %>)</small>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>
