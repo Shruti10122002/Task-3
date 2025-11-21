@@ -1,0 +1,66 @@
+/* src/index.css - Beautiful Global Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Beautiful Additions */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+/* Glassmorphism Card */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Neon Glow Button */
+.glow-btn {
+  background: linear-gradient(45deg, #ff006e, #8338ec);
+  padding: 14px 32px;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: white;
+  box-shadow: 0 0 20px rgba(131, 56, 236, 0.6);
+  transition: all 0.3s;
+}
+
+.glow-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+}
+
+/* Title Glow */
+.title-glow {
+  font-size: 4rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #00f5ff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
