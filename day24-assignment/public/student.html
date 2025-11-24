@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    #chat { height: 400px; border: 1px solid #ccc; overflow-y: scroll; padding: 10px; background: #fafafa; }
+    .msg { margin: 8px 0; }
+    .system { color: gray; font-style: italic; }
+  </style>
+</head>
+<body>
+  <h1>Student Live Chat</h1>
+  <button onclick="join('course-101')">Join Course 101</button>
+  <div id="chat"></div>
+  <input type="text" id="input" placeholder="Type message..." style="width:80%; padding:10px;">
+  <button onclick="send()">Send</button><br><br>
+
+  <h3>Download Materials</h3>
+  <a href="/materials/" target="_blank">Open /materials folder (all uploaded PDFs)</a>
+
+  <script>
+    const socket = io();
+    let room = '';
+
+    function join(r) {
+      room = r;
+      socket.emit('joinRoom', room);
+    }
+
+    socket.on('message', (data) => {
+      const div = document.createElement('div');
+      div.classList.add('msg');
+      if (data.user === 'System') div.classList.add('system');
+      div.innerHTML = `<strong>${data.user}:</strong> ${data.text}`;
+      document.getElementById('chat').appendChild(div);
+      div.scrollIntoView();
+    });
+
+    function send() {
+      const msg = document.getElementById('input').value.trim();
+      if (msg && room) {
+        socket.emit('chatMessage', { room, msg, user: 'Student' });
+        document.getElementById('input').value = '';
+      }
+    }
+
+    document.getElementById('input').addEventListener('keypress', e => {
+      if (e.key === 'Enter') send();
+    });
+  </script>
+</body>
+</html>
